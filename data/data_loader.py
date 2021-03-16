@@ -25,7 +25,7 @@ class QQPDataset(Dataset):
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
             idx = idx.tolist()
-        input_ids = self.input_ids[idx, :].to(self.device)
+        input_ids = self.input_ids[idx, :]
         samples = {
             'input_ids': input_ids,
         }
