@@ -24,7 +24,7 @@ def train(args):
 
     train_dataset = QQPDataset(gpt_model.tokenizer, args.train_data_path,
                                max_length=args.max_length,
-                               load_noise_data=True,
+                               load_noise_data=False,
                                device=device, is_toy=args.toy)
     dev_dataset = QQPDataset(gpt_model.tokenizer, args.dev_data_path,
                              max_length=args.max_length,
