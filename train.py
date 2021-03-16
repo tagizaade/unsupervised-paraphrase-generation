@@ -54,8 +54,7 @@ def train(args):
         model=gpt_model.model,
         args=training_args,
         train_dataset=train_dataset,
-        eval_dataset=dev_dataset,
-        prediction_loss_only=True,
+        eval_dataset=dev_dataset
     )
 
     trainer.train()
