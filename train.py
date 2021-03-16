@@ -55,7 +55,6 @@ def train(args):
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=dev_dataset,
-        tb_writer=gpt_model.writer,
         prediction_loss_only=True,
     )
 
