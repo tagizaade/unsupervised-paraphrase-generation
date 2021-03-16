@@ -44,7 +44,6 @@ def train(args):
         learning_rate=args.learning_rate,
         warmup_steps=300,  # warmup_steps=gpt_model.num_warmup_steps,
         weight_decay=0.01,
-        evaluate_during_training=True,
         save_steps=args.save_steps,
         eval_steps=args.save_steps,
         seed=args.seed,
