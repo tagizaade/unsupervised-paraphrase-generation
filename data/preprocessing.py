@@ -5,19 +5,11 @@ import random
 from nltk.corpus import stopwords
 from nltk.tokenize.treebank import TreebankWordTokenizer
 from nltk.tokenize.treebank import TreebankWordDetokenizer
-from transformers import GPT2Tokenizer
+from transformers import AutoTokenizer
 
 from eda import synonym_replacement
 
-english_stopwords = stopwords.words('english')
-
-# Stopwords from case study of the paper
-# 1. From case study
-english_stopwords += ['someone', 'something', 'make', 'see']
-# 2. From possible candidates
-english_stopwords += ['everything']
-# 3. Similar words from those of case study
-english_stopwords += ['anyone', 'anything', 'everyone']
+arabic_stopwords = [l.strip() for l in open('arabic_synonyms.txt', encoding='utf-8').readlines()]
 
 tokenizer = TreebankWordTokenizer()
 detokenizer = TreebankWordDetokenizer()
@@ -25,8 +17,7 @@ detokenizer = TreebankWordDetokenizer()
 
 def remove_stopwords(sentence):
     sentence = tokenizer.tokenize(sentence)
-    sentence = [word for word in sentence
-                if word.lower() not in english_stopwords]
+    sentence = [word for word in sentence if word.lower() not in arabic_stopwords]
     sentence = ' '.join(sentence)
     sentence = sentence.replace("''", '"').replace('``', '"')
     sentence = detokenizer.detokenize(sentence.split())
@@ -47,9 +38,9 @@ def sentence_noising(sentence, shuffle_ratio=0.2, replace_ratio=0.2):
 
 
 def data_preparation(args):
-    gpt_tokenizer = GPT2Tokenizer.from_pretrained('gpt2-medium')
+    gpt_tokenizer = AutoTokenizer.from_pretrained('aubmindlab/aragpt2-base')
     data = []
-    with open(args.input) as f:
+    with open(args.input, encoding='utf-8') as f:
         skipped = 0
         for line in f:
             sentence = line.strip()
@@ -61,7 +52,7 @@ def data_preparation(args):
                 skipped += 1
     print("Skipped: {}".format(skipped))
 
-    with open(args.output, 'w') as wf:
+    with open(args.output, 'w', encoding='utf-8') as wf:
         writer = csv.writer(wf)
         for corrupted, sentence in data:
             writer.writerow([corrupted, sentence])

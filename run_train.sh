@@ -8,8 +8,8 @@ N_EPOCHS=8
 SAVE_STEPS=300  # Validating and save checkpoints
 RANDOM_SEED=1223734
 
-TRAIN_DATA="./data/QQP_split/train_preprocessed.txt"
-DEV_DATA="./data/QQP_split/dev_preprocessed.txt"
+TRAIN_DATA="./data/quran-simple-clean-train.txt"
+DEV_DATA="./data/quran-simple-clean-dev.txt"
 
 CUDA_VISIBLE_DEVICES=${GPU_ID} python train.py \
     --train_data_path ${TRAIN_DATA}\

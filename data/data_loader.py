@@ -42,7 +42,7 @@ class QQPDataset(Dataset):
         logging.info("Loading data from {}".format(filename))
 
         data = []
-        with open(filename) as f:
+        with open(filename, encoding='utf-8') as f:
             reader = csv.reader(f)
             for corrupted, sentence in reader:
                 data.append([corrupted, sentence])

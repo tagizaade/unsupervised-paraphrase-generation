@@ -86,7 +86,7 @@ if __name__ == '__main__':
     parser.add_argument('--device', type=str, default='cuda',
                         help='{cuda, cpu}')
 
-    parser.add_argument('--model', type=str, default='gpt2-medium',
+    parser.add_argument('--model', type=str, default='aubmindlab/aragpt2-base',
                         help='pretrained model name (only gpt available)')
     parser.add_argument('--max_length', type=int, default=1024,
                         help='Maximum number of tokens for each sequence')
